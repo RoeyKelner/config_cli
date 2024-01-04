@@ -8,9 +8,9 @@ CONFIG_XML_PATH = "D:\\Users\\rkelner\\source\\MfgTools\\src\\config.xml"
 def main():
     role_dict = {'CONSOLE' : 'Contoller', 'DUT' : 'DUT'}
     elements_to_set = {
-        'PlatformFamily': 'Platform Family',
-        'KitVersion' : 'Kit Version', 
-        'SystemToolsPath' : 'Tools Path',
+        'PlatformFamily':'Platform Family',
+        'KitVersion':'Kit Version', 
+        'SystemToolsPath':'Tools Path',
         'ImagePath':'Image Path',
         'FwSku':'FwSku',
                     }
@@ -24,14 +24,12 @@ def main():
         set_ip(role, entity)
         set_password(entity, role)
 
-    keep_current_or_set_new(root.find('.//PlatformFamily'), 'Platform Family')
-    keep_current_or_set_new(root.find('.//KitVersion'), 'Kit Version')
-    keep_current_or_set_new(root.find('.//SystemToolsPath'), 'Tools Path')
-    keep_current_or_set_new(root.find('.//ImagePath'), 'Image Path')
-    keep_current_or_set_new(root.find('.//FwSku'), 'FwSku')
-
-
+    for element_tag, element_name in elements_to_set.items():
+        keep_current_or_set_new(root.find(f'.//{element_tag}'), element_name)
+    
     tree.write(CONFIG_XML_PATH)
+
+    print(f'Successfully updated {CONFIG_XML_PATH}!')
 
 def keep_current_or_set_new(elem, elem_name):
     usr_input = input(f'Current {elem_name} is {elem.text} [Hit <Enter> to confirm or type a new one]:\n')
