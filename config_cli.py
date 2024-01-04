@@ -7,6 +7,14 @@ CONFIG_XML_PATH = "D:\\Users\\rkelner\\source\\MfgTools\\src\\config.xml"
 
 def main():
     role_dict = {'CONSOLE' : 'Contoller', 'DUT' : 'DUT'}
+    elements_to_set = {
+        'PlatformFamily': 'Platform Family',
+        'KitVersion' : 'Kit Version', 
+        'SystemToolsPath' : 'Tools Path',
+        'ImagePath':'Image Path',
+        'FwSku':'FwSku',
+                    }
+
     tree = ET.parse(CONFIG_XML_PATH)
     root = tree.getroot()
     print(f'Editing conf file at: {CONFIG_XML_PATH}\n')
